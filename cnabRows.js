@@ -11,12 +11,15 @@ const optionsYargs = yargs(process.argv.slice(2))
   .option("f", { alias: "from", describe: "posição inicial de pesquisa da linha do Cnab", type: "number", demandOption: true })
   .option("t", { alias: "to", describe: "posição final de pesquisa da linha do Cnab", type: "number", demandOption: true })
   .option("s", { alias: "segmento", describe: "tipo de segmento", type: "string", demandOption: true })
-  .example('$0 -f 21 -t 34 -s p', 'lista a linha e campo que from e to do cnab')
+  .option("file", { alias: "arquivo", describe: "caminho do arquivo CNAB a ser lido", type: "string", demandOption: false })
+  .example('$0 -f 21 -t 34 -s p --file /path/cnab.rem')
   .argv;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const file = path.resolve(`${__dirname}/cnabExample.rem`)
+const file = optionsYargs.file
+  ? path.resolve(optionsYargs.file)
+  : path.resolve(`${__dirname}/cnabExample.rem`)
 
 const { from, to, segmento } = optionsYargs
 
