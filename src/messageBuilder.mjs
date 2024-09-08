@@ -39,6 +39,6 @@ export function messageToDebtorArgumentOutput(debtorName, bills) {
   return logMessage
 }
 
-export function messageToDefaultCNABFile() {
+export function messageToDefaultCNABFileOutput() {
   return `\n --- ${chalk.green("Lendo o arquivo CNAB default do projeto")} ---\n`
 }
