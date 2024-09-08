@@ -1,7 +1,11 @@
 'use strict'
 
+import { writeFile } from 'fs/promises'
+
 import { groupSegmentsByPayersNames, searchBillsByPayerName } from "./utils.mjs"
-import { messageToSegmentArgumentOutput, messageToPayerArgumentOutput } from "./messageBuilder.mjs"
+import { messageToSegmentArgumentOutput, messageToPayerArgumentOutput, messageToFileExportationOutput } from "./messageBuilder.mjs"
+import { extractSegmentP, extractSegmentQ } from "./constants/cnab240.mjs"
+import { randomUUID } from 'crypto'
 
 const log = console.log
 
@@ -42,4 +46,25 @@ export function handlePayerSearch(cnabBody, payerName) {
   matchedBills.forEach(({ name, bill }) => {
     log(messageToPayerArgumentOutput(name, bill))
   })
+}
+
+export async function handleExportation(cnabBody) {
+  const bills = []
+
+  for (let i = 0; i < cnabBody.length; i += 3) {
+    const segmentP = cnabBody[i]
+    const segmentQ = cnabBody[i + 1]
+
+    const bill = {
+      ...extractSegmentP(segmentP, i + 3),
+      ...extractSegmentQ(segmentQ, i + 4),
+
+    }
+
+    bills.push(bill)
+  }
+
+  const fileName = `${randomUUID()}.json`
+  await writeFile(fileName, JSON.stringify(bills))
+  log(messageToFileExportationOutput(fileName))
 }

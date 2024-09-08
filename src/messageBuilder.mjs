@@ -39,6 +39,13 @@ export function messageToPayerArgumentOutput(payerName, bills) {
   return logMessage
 }
 
+export function messageToFileExportationOutput(filePath) {
+  let logMessage = `\nArquivo gerado: ${chalk.green(filePath)}\n`
+  logMessage += `----- FIM ------`
+
+  return logMessage
+}
+
 export function messageToDefaultCNABFileOutput() {
   return `\n --- ${chalk.green("Lendo o arquivo CNAB default do projeto")} ---\n`
 }

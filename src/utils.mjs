@@ -44,3 +44,16 @@ export function searchBillsByPayerName(groupedSegments, payerName) {
 export function sliceArrayPosition(arr, ...positions) {
   return [...arr].slice(...positions)
 }
+
+export function formatDateCNAB(dateCNAB) {
+  if (dateCNAB.length !== 8) {
+    throw new Error('Formato de data inválido. Deve ser no formato ddmmaa.');
+  }
+
+  const day = dateCNAB.substring(0, 2);
+  const month = dateCNAB.substring(2, 4);
+  const year = dateCNAB.substring(4, 8);
+
+
+  return `${day}/${month}/${year}`;
+}

@@ -5,7 +5,7 @@ import { readFile } from 'fs/promises'
 import { fileURLToPath } from 'url';
 import yargs from 'yargs'
 import { sliceArrayPosition } from "./utils.mjs"
-import { handlePayerSearch, handleSegmentSearch } from "./handlers.mjs"
+import { handlePayerSearch, handleSegmentSearch, handleExportation } from "./handlers.mjs"
 import { messageToDefaultCNABFileOutput } from "./messageBuilder.mjs"
 
 const optionsYargs = yargs(process.argv.slice(2))
@@ -15,6 +15,7 @@ const optionsYargs = yargs(process.argv.slice(2))
   .option("s", { alias: "segmento", describe: "tipo de segmento", type: "string", demandOption: false })
   .option("file", { alias: "arquivo", describe: "caminho do arquivo CNAB a ser lido", type: "string", demandOption: false })
   .option("d", { alias: "devedor", describe: "nome do devedor", type: "string", demandOption: false })
+  .option("export", { alias: "exportacao" })
   .example('$0 -f 21 -t 34 -s p --file /path/cnab.rem')
   .example('$0 -d CAIXA ECONOMICA --file /path/cnab.rem')
   .argv;
@@ -30,7 +31,7 @@ if (optionsYargs.file) {
   console.log(messageToDefaultCNABFileOutput())
 }
 
-const { from, to, segmento: segment, devedor: payer } = optionsYargs
+const { from, to, segmento: segment, devedor: payer, export: exportation } = optionsYargs
 
 async function main() {
   try {
@@ -46,6 +47,9 @@ async function main() {
         break;
       case !!payer:
         handlePayerSearch(cnabBody, payer)
+        break
+      case !!exportation:
+        handleExportation(cnabBody)
         break
       default:
         console.log('Por favor, forneça uma opção válida.');
