@@ -1,7 +1,7 @@
 'use strict';
 import chalk from 'chalk'
 
-export function messageBuilder(segment, segmentType, from, to, debtorName) {
+export function messageToSegmentArgumentOutput(segment, segmentType, from, to, debtorName) {
   let logMessage = `\n----- CNAB segmento tipo ${segmentType} -----\n`;
 
   if (debtorName) {
@@ -26,4 +26,14 @@ linha completa: ${chalk.inverse(segment)}`;
   logMessage += `----- FIM ------`;
 
   return logMessage;
+}
+
+export function messageToDebtorArgumentOutput(debtorName, bills) {
+  let logMessage = `\n----- Correspondências de ${debtorName} -----\n`
+  bills.forEach(({ line, content }) => {
+    logMessage += `\n${chalk.bgGreen("linha:", line)} conteúdo: ${chalk.inverse(content)}\n`
+  })
+  logMessage += `----- FIM ------`
+
+  return logMessage
 }
