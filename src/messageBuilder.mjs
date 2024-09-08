@@ -1,4 +1,5 @@
-'use strict';
+'use strict'
+
 import chalk from 'chalk'
 
 export function messageToSegmentArgumentOutput(segment, segmentType, from, to, debtorName) {
@@ -23,7 +24,7 @@ item dentro da linha ${segmentType}:
 linha completa: ${chalk.inverse(segment)}`;
   }
 
-  logMessage += `----- FIM ------`;
+  logMessage += `\n----- FIM ------`;
 
   return logMessage;
 }
