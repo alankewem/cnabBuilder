@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import yargs from 'yargs'
 import { sliceArrayPosition } from "./utils.mjs"
 import { handleDebtorSearch, handleSegmentSearch } from "./handlers.mjs"
+import { messageToDefaultCNABFile } from "./messageBuilder.mjs"
 
 const optionsYargs = yargs(process.argv.slice(2))
   .usage('Uso: $0 [options]')
@@ -20,9 +21,14 @@ const optionsYargs = yargs(process.argv.slice(2))
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const filePath = optionsYargs.file
-  ? path.resolve(optionsYargs.file)
-  : path.resolve(`${__dirname}/../cnabExample.rem`)
+
+let filePath
+if (optionsYargs.file) {
+  filePath = path.resolve(optionsYargs.file)
+} else {
+  filePath = path.resolve(`${__dirname}/../cnabExample.rem`)
+  console.log(messageToDefaultCNABFile())
+}
 
 const { from, to, segmento: segment, devedor: debtor } = optionsYargs
 
