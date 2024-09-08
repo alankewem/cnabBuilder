@@ -2,11 +2,11 @@
 
 import chalk from 'chalk'
 
-export function messageToSegmentArgumentOutput(segment, segmentType, from, to, debtorName) {
+export function messageToSegmentArgumentOutput(segment, segmentType, from, to, payerName) {
   let logMessage = `\n----- CNAB segmento tipo ${segmentType} -----\n`;
 
-  if (debtorName) {
-    logMessage += `Nome do devedor: ${String(debtorName).toUpperCase()}`
+  if (payerName) {
+    logMessage += `Nome do devedor: ${String(payerName).toUpperCase()}`
   }
 
   if (from && to) {
@@ -29,8 +29,8 @@ linha completa: ${chalk.inverse(segment)}`;
   return logMessage;
 }
 
-export function messageToDebtorArgumentOutput(debtorName, bills) {
-  let logMessage = `\n----- Correspondências de ${debtorName} -----\n`
+export function messageToPayerArgumentOutput(payerName, bills) {
+  let logMessage = `\n----- Correspondências de ${payerName} -----\n`
   bills.forEach(({ line, content }) => {
     logMessage += `\n${chalk.bgGreen("linha:", line)} conteúdo: ${chalk.inverse(content)}\n`
   })

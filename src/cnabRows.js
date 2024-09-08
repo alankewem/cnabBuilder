@@ -5,7 +5,7 @@ import { readFile } from 'fs/promises'
 import { fileURLToPath } from 'url';
 import yargs from 'yargs'
 import { sliceArrayPosition } from "./utils.mjs"
-import { handleDebtorSearch, handleSegmentSearch } from "./handlers.mjs"
+import { handlePayerSearch, handleSegmentSearch } from "./handlers.mjs"
 import { messageToDefaultCNABFileOutput } from "./messageBuilder.mjs"
 
 const optionsYargs = yargs(process.argv.slice(2))
@@ -30,7 +30,7 @@ if (optionsYargs.file) {
   console.log(messageToDefaultCNABFileOutput())
 }
 
-const { from, to, segmento: segment, devedor: debtor } = optionsYargs
+const { from, to, segmento: segment, devedor: payer } = optionsYargs
 
 async function main() {
   try {
@@ -44,8 +44,8 @@ async function main() {
       case !!segment:
         handleSegmentSearch(cnabBody, segment, from, to)
         break;
-      case !!debtor:
-        handleDebtorSearch(cnabBody, debtor)
+      case !!payer:
+        handlePayerSearch(cnabBody, payer)
         break
       default:
         console.log('Por favor, forneça uma opção válida.');

@@ -1,6 +1,8 @@
 'use strict'
 
-export function groupSegmentsByDebtorsNames(cnabArray) {
+import { SEGMENT_Q } from "./constants/cnab240.mjs";
+
+export function groupSegmentsByPayersNames(cnabArray) {
   const groupedBills = new Map();
 
   // Processa as linhas do CNAB de 3 em 3 (cada conjunto P, Q, R)
@@ -9,13 +11,13 @@ export function groupSegmentsByDebtorsNames(cnabArray) {
     const segmentQ = cnabArray[i + 1];
     const segmentR = cnabArray[i + 2];
 
-    const debtorName = segmentQ.substring(33, 73).trim();
+    const payerName = segmentQ.substring(SEGMENT_Q.PAYER_NAME.position[0] - 1, SEGMENT_Q.PAYER_NAME.position[1]).trim();
 
-    if (!groupedBills.has(debtorName)) {
-      groupedBills.set(debtorName, { P: [], Q: [], R: [] });
+    if (!groupedBills.has(payerName)) {
+      groupedBills.set(payerName, { P: [], Q: [], R: [] });
     }
 
-    const segments = groupedBills.get(debtorName);
+    const segments = groupedBills.get(payerName);
     segments.P.push({ content: segmentP, line: i + 3 });
     segments.Q.push({ content: segmentQ, line: i + 4 });
     segments.R.push({ content: segmentR, line: i + 5 });
@@ -24,15 +26,15 @@ export function groupSegmentsByDebtorsNames(cnabArray) {
   return groupedBills
 }
 
-export function searchBillsByDebtorName(groupedSegments, debtorName) {
+export function searchBillsByPayerName(groupedSegments, payerName) {
   const matchedBills = [];
 
-  for (const [debtor, segment] of groupedSegments.entries()) {
-    const nameMatch = String(debtor).toLowerCase().includes(String(debtorName).toLowerCase());
+  for (const [payer, segment] of groupedSegments.entries()) {
+    const nameMatch = String(payer).toLowerCase().includes(String(payerName).toLowerCase());
 
     if (nameMatch) {
       segment.P.forEach((_, index) => {
-        matchedBills.push({ name: debtor, bill: [segment.P[index], segment.Q[index], segment.R[index]] });
+        matchedBills.push({ name: payer, bill: [segment.P[index], segment.Q[index], segment.R[index]] });
       });
     }
   }
