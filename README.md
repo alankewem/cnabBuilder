@@ -6,16 +6,22 @@ Utilizei o node.js na versão:
 v16.11.1
 ```
 
+Instalação via npm:
+
+```bash
+npm install -g cnab-reader
+```
+
 Comando para visualizar as opções de execução disponíveis:
 
 ```bash
-node src/cnabRows.js --help
+cnab-reader --help
 ```
 
 temos o seguinte output:
 
 ```bash
-Uso: cnabRows.js [options]
+Uso: cnab-reader [options]
 
 Options:
       --help                  Show help                                [boolean]
@@ -29,9 +35,9 @@ Options:
       --export, --exportação  irá coletar as principais informações do arquivo CNAB e exportar para um novo arquivo com extensão .json
 
 Examples:
-  cnabRows.js -f 21 -t 34 -s p --file /path/cnab.rem
-  cnabRows.js -d CAIXA ECONOMICA --file /path/cnab.rem
-  cnabRows.js --export
+  cnab-reader -f 21 -t 34 -s p --file /path/cnab.rem
+  cnab-reader -d CAIXA ECONOMICA --file /path/cnab.rem
+  cnab-reader --export
 ```
 
 **Novas funcionalidades implementadas**
