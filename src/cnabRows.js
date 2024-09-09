@@ -15,9 +15,10 @@ const optionsYargs = yargs(process.argv.slice(2))
   .option("s", { alias: "segmento", describe: "tipo de segmento", type: "string", demandOption: false })
   .option("file", { alias: "arquivo", describe: "caminho do arquivo CNAB a ser lido", type: "string", demandOption: false })
   .option("d", { alias: "devedor", describe: "nome do devedor", type: "string", demandOption: false })
-  .option("export", { alias: "exportacao" })
+  .option("export", { alias: "exportação", describe: "irá coletar as principais informações do arquivo CNAB e exportar para um novo arquivo com extensão .json" })
   .example('$0 -f 21 -t 34 -s p --file /path/cnab.rem')
   .example('$0 -d CAIXA ECONOMICA --file /path/cnab.rem')
+  .example('$0 --export')
   .argv;
 
 const __filename = fileURLToPath(import.meta.url);
@@ -37,8 +38,6 @@ async function main() {
   try {
     const fileContent = await readFile(filePath, 'utf8')
     const cnabArray = fileContent.split("\n")
-    // const cnabHeader = sliceArrayPosition(cnabArray, 0, 2)
-    // const cnabTail = sliceArrayPosition(cnabArray, -2)
     const cnabBody = sliceArrayPosition(cnabArray, 2, -2)
 
     switch (true) {
@@ -52,7 +51,7 @@ async function main() {
         handleExportation(cnabBody)
         break
       default:
-        console.log('Por favor, forneça uma opção válida.');
+        yargs().showHelp()
         break;
     }
   } catch (error) {
