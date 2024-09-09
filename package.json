@@ -1,8 +1,20 @@
 {
-  "name": "cnabReader",
+  "name": "cnab-reader",
+  "description": "Um pacote para ler e processar arquivos CNAB",
+  "author": "Alan Kewem <alankewem@gmail.com>",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/alankewem/cnabBuilder.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alankewem/cnabBuilder.git"
+  },
+  "keywords": [
+    "CNAB",
+    "reader",
+    "bank",
+    "file",
+    "CLI"
+  ],
   "bin": {
     "cnabReader": "./src/cnabRows.js"
   },
