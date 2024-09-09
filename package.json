@@ -1,14 +1,17 @@
 {
-  "name": "cnabBuilder",
+  "name": "cnabReader",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/gadielkalleb/cnabBuilder.git",
+  "repository": "https://github.com/alankewem/cnabBuilder.git",
   "bin": {
     "cnabReader": "./src/cnabRows.js"
   },
   "preferGlobal": true,
   "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
   "dependencies": {
     "chalk": "^4.1.0",
     "yargs": "^16.2.0"
