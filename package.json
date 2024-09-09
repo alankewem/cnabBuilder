@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/gadielkalleb/cnabBuilder.git",
+  "bin": {
+    "cnabReader": "./src/cnabRows.js"
+  },
+  "preferGlobal": true,
   "license": "MIT",
   "type": "module",
   "dependencies": {
