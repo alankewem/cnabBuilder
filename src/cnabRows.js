@@ -24,12 +24,20 @@ const optionsYargs = yargs(process.argv.slice(2))
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const ignoredKeys = ['_', '$0', 'file', 'h'];
+
+const hasValidArguments = Object.keys(optionsYargs).some(key =>
+  !ignoredKeys.includes(key) && optionsYargs[key] !== undefined
+);
+
 let filePath
 if (optionsYargs.file) {
   filePath = path.resolve(optionsYargs.file)
 } else {
   filePath = path.resolve(`${__dirname}/../cnabExample.rem`)
-  console.log(messageToDefaultCNABFileOutput())
+  if (hasValidArguments) {
+    console.log(messageToDefaultCNABFileOutput())
+  }
 }
 
 const { from, to, segmento: segment, devedor: payer, export: exportation } = optionsYargs
