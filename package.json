@@ -16,7 +16,7 @@
     "CLI"
   ],
   "bin": {
-    "cnabReader": "./src/cnabRows.js"
+    "cnab-reader": "./src/cnabRows.js"
   },
   "preferGlobal": true,
   "license": "MIT",
