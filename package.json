@@ -2,7 +2,7 @@
   "name": "cnab-reader",
   "description": "Um pacote para ler e processar arquivos CNAB",
   "author": "Alan Kewem <alankewem@gmail.com>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": {
     "type": "git",
