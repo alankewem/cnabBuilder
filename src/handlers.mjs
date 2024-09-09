@@ -65,6 +65,6 @@ export async function handleExportation(cnabBody) {
   }
 
   const fileName = `${randomUUID()}.json`
-  await writeFile(fileName, JSON.stringify(bills))
+  await writeFile(fileName, JSON.stringify(bills, null, 2), "utf8")
   log(messageToFileExportationOutput(fileName))
 }
