@@ -1,5 +1,7 @@
 # Leitor de arquivos CNAB
 
+<img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Y3c4ZWowdzVhYnR1emcyZjdqOWNlbTNwZWc3cmExY3JodXAzYWJyMiZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/jokPYgbBbkByEdmOQf/giphy.gif">
+
 Utilizei o node.js na versão:
 
 ```bash
